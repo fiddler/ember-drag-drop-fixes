@@ -276,7 +276,7 @@ When writing tests, there is a `drag` helper you can use to help facilitate drag
 
 ```js
 // new async helper
-import { drag } from 'ember-drag-drop/test-support/drag-drop';
+import { drag } from 'ember-drag-drop/test-support/helpers/drag-drop';
 ```
 
 You can pass the CSS selector for the `draggable-object-target` and pass a `beforeDrop` callback.
