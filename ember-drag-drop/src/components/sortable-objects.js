@@ -10,6 +10,7 @@ export default Component.extend( {
   enableSort: true,
   useSwap: true,
   inPlace: false,
+  ignoreDragendLock: false,
   sortingScope: 'drag-objects',
   sortableObjectList: A(),
 
@@ -46,7 +47,26 @@ export default Component.extend( {
     return false;
   },
 
+  dragEnd(event) {
+    if (this.ignoreDragendLock) {
+      return;
+    }
+    // needed so drop event will fire
+    event.stopPropagation();
+    event.preventDefault();
+    this.set('dragCoordinator.sortComponentController', undefined);
+    if (this.get('enableSort') && this.get('sortEndAction')) {
+      this.get('sortEndAction')(event);
+    }
+  },
+
   drop(event) {
+    // DEVNOTE: Drop fires before dragend - dragend is needed when item is dropped outside of the sortable area
+    this.ignoreDragendLock = true;
+    setTimeout(() => {
+      this.ignoreDragendLock = false;
+    }, 200);
+
     event.stopPropagation();
     event.preventDefault();
     this.set('dragCoordinator.sortComponentController', undefined);
