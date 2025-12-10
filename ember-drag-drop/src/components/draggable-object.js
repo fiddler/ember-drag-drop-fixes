@@ -156,11 +156,15 @@ export default Component.extend({
   },
 
   dragStartHook(event) {
-    event.target.style.opacity = '0.5';
+    if (event.target && event.target.style) {
+      event.target.style.opacity = '0.5';
+    }
   },
 
   dragEndHook(event) {
-    event.target.style.opacity = '1';
+    if (event.target && event.target.style) {
+      event.target.style.opacity = '1';
+    }
   },
 
   drop(event) {
