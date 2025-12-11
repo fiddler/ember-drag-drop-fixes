@@ -5,7 +5,7 @@
 /LICENSE.md
 
 # compiled output
-dist/
+# dist/ - committed for direct GitHub installs without build step
 declarations/
 
 # npm/pnpm/yarn pack output
